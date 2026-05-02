@@ -634,7 +634,7 @@ const TABS=[
   {label:'★ 一覧',          data:'star',isStar:true},
 ];
 
-let currentTab=0,deck=[],idx=0,flipped=false;
+let currentTab=0,deck=[],idx=0,flipped=false,reviewMode=false;
 
 function isStar(k){return localStorage.getItem('star:'+k)==='1';}
 function setStar(k,v){v?localStorage.setItem('star:'+k,'1'):localStorage.removeItem('star:'+k);}
@@ -653,7 +653,7 @@ function buildTabs(){
 }
 
 function selectTab(i){
-  currentTab=i;buildTabs();
+  currentTab=i;reviewMode=false;buildTabs();
   const t=TABS[i];
   if(t.isStar){
     document.getElementById('cardView').style.display='none';
@@ -673,7 +673,7 @@ function render(){
   document.getElementById('card').classList.remove('flipped');
   document.getElementById('progress').textContent=(idx+1)+' / '+deck.length;
   document.getElementById('progressFill').style.width=((idx+1)/deck.length*100)+'%';
-  document.getElementById('groupLabel').textContent=cd.g;
+  document.getElementById('groupLabel').textContent=reviewMode?('★ 復習モード｜'+cd.g):cd.g;
   document.getElementById('kanjiDisp').textContent=cd.kanji;
   var fr=document.getElementById('front');
   var bd=fr.querySelector('.star-badge');
@@ -705,9 +705,25 @@ function renderStarView(){
   var starred=allCards().filter(function(c){return isStar(c.kanji);});
   if(!starred.length){list.innerHTML='';ns.style.display='block';return;}
   ns.style.display='none';
-  list.innerHTML=starred.map(function(c){
+  var html='<button onclick="startReview()" style="width:100%;padding:12px;background:var(--brand);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;margin-bottom:14px;">★ をフラッシュカードで覚える（'+starred.length+'枚）</button>';
+  html+=starred.map(function(c){
     return '<div class="star-item"><div><div class="star-item-kanji">'+c.kanji+'</div><div class="star-item-info">'+c.g+' ／ '+c.R.map(function(rv){return rv.jp;}).join('・')+'</div></div><button class="star-remove" onclick="removeStar(\''+c.kanji.replace(/'/g,"\\'")+'\')">&times;</button></div>';
   }).join('');
+  list.innerHTML=html;
+}
+
+function startReview(){
+  var starred=allCards().filter(function(c){return isStar(c.kanji);});
+  if(!starred.length){alert('★をつけた漢字がありません。');return;}
+  reviewMode=true;
+  deck=starred;
+  idx=0;
+  flipped=false;
+  // 全タブのactive状態を解除
+  document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active');});
+  document.getElementById('cardView').style.display='block';
+  document.getElementById('starView').style.display='none';
+  render();
 }
 
 function removeStar(k){setStar(k,false);renderStarView();}
@@ -721,7 +737,25 @@ document.getElementById('shuffleBtn').onclick=function(){
 };
 document.getElementById('starBtn').onclick=function(){
   if(!deck.length)return;
-  var k=deck[idx].kanji;setStar(k,!isStar(k));render();
+  var k=deck[idx].kanji;
+  var wasStarred=isStar(k);
+  setStar(k,!wasStarred);
+  // 復習モード中で★を外した場合、そのカードをデッキから削除
+  if(reviewMode && wasStarred){
+    deck=deck.filter(function(c){return c.kanji!==k;});
+    if(deck.length===0){
+      reviewMode=false;
+      alert('全部覚えました！おめでとう！\nSemua sudah dihafalkan! Selamat!');
+      // ★一覧タブに戻る
+      var starTabIdx=TABS.findIndex(function(t){return t.isStar;});
+      selectTab(starTabIdx);
+      return;
+    }
+    if(idx>=deck.length)idx=0;
+    render();
+    return;
+  }
+  render();
 };
 document.getElementById('clearAllBtn').onclick=function(){
   allCards().forEach(function(c){setStar(c.kanji,false);});renderStarView();
