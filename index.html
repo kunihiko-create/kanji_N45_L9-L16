@@ -728,7 +728,50 @@ function startReview(){
 
 function removeStar(k){setStar(k,false);renderStarView();}
 
-document.getElementById('scene').onclick=function(){flipped=!flipped;document.getElementById('card').classList.toggle('flipped',flipped);};
+/* ===== スワイプ＆クリック処理 ===== */
+(function(){
+  var scene=document.getElementById('scene');
+  var startX=0,startY=0,startT=0,touched=false;
+  var SWIPE_THRESHOLD=50; // 50px以上で横スワイプと判定
+
+  function flip(){
+    flipped=!flipped;
+    document.getElementById('card').classList.toggle('flipped',flipped);
+  }
+
+  scene.addEventListener('touchstart',function(ev){
+    touched=true;
+    var t=ev.touches[0];
+    startX=t.clientX;startY=t.clientY;startT=Date.now();
+  },{passive:true});
+
+  scene.addEventListener('touchend',function(ev){
+    var t=ev.changedTouches[0];
+    var dx=t.clientX-startX;
+    var dy=t.clientY-startY;
+    if(Math.abs(dx)>SWIPE_THRESHOLD && Math.abs(dx)>Math.abs(dy)){
+      // 横スワイプと判定
+      ev.preventDefault();
+      if(!deck.length)return;
+      if(dx>0){
+        // 右スワイプ → 次へ
+        idx=(idx+1)%deck.length;render();
+      } else {
+        // 左スワイプ → 前へ
+        idx=(idx-1+deck.length)%deck.length;render();
+      }
+    } else {
+      // タップ判定 → フリップ
+      flip();
+    }
+  });
+
+  // タッチ未対応環境（PC等）のクリック動作
+  scene.addEventListener('click',function(ev){
+    if(touched){touched=false;return;} // touchendが先に発火している場合は無視
+    flip();
+  });
+})();
 document.getElementById('prevBtn').onclick=function(){idx=(idx-1+deck.length)%deck.length;render();};
 document.getElementById('nextBtn').onclick=function(){idx=(idx+1)%deck.length;render();};
 document.getElementById('shuffleBtn').onclick=function(){
