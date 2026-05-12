@@ -59,6 +59,78 @@ header p{font-size:12px;opacity:.8;margin-top:2px;}
 .star-remove:hover{color:#e44;}
 #noStars{text-align:center;color:#aaa;padding:40px 0;font-size:14px;}
 footer{text-align:center;font-size:11px;color:#bbb;padding:16px;margin-top:8px;}
+
+/* ===== モード切替バー ===== */
+#modeBar{display:flex;gap:6px;padding:10px 10px 0;max-width:520px;margin:0 auto;}
+.mode-btn{flex:1;padding:10px 4px;font-size:12px;border:1.5px solid #ddd;border-radius:10px;background:#fff;color:#444;font-weight:600;cursor:pointer;text-align:center;line-height:1.3;transition:all .15s;}
+.mode-btn:hover{border-color:var(--brand);color:var(--brand);}
+.mode-btn.active{background:var(--brand);color:#fff;border-color:var(--brand);}
+
+/* ===== クイズ画面 ===== */
+#quizView,#typingView,#resultView{display:none;width:100%;max-width:480px;margin:0 auto;padding:12px;}
+
+.quiz-card{background:#fff;border-radius:16px;box-shadow:0 4px 16px rgba(0,0,0,.1);padding:36px 18px 26px;text-align:center;margin-bottom:18px;}
+.quiz-kanji{font-size:56px;font-weight:900;color:#222;line-height:1.1;margin-bottom:14px;word-break:break-all;}
+.quiz-prompt{font-size:13px;color:#888;}
+
+.quiz-choices{display:flex;flex-direction:column;gap:8px;}
+.quiz-choice{background:#fff;border:1.5px solid #ddd;border-radius:10px;padding:14px 16px;font-size:16px;cursor:pointer;text-align:left;font-family:inherit;color:#333;transition:all .12s;}
+.quiz-choice:hover:not(:disabled){background:#f5f8fc;border-color:var(--brand);}
+.quiz-choice:disabled{cursor:default;}
+.quiz-choice.correct{background:#e8f5e9;border-color:#4caf50;color:#2e7d32;font-weight:700;}
+.quiz-choice.wrong{background:#ffebee;border-color:#e55353;color:#c62828;font-weight:700;}
+.quiz-choice .num{display:inline-block;width:22px;color:#888;font-weight:600;}
+
+/* ===== タイピング画面 ===== */
+.typing-input{width:100%;padding:14px 16px;font-size:18px;border:2px solid #ddd;border-radius:10px;text-align:center;outline:none;font-family:inherit;}
+.typing-input:focus{border-color:var(--brand);}
+.typing-input.correct{border-color:#4caf50;background:#e8f5e9;}
+.typing-input.wrong{border-color:#e55353;background:#ffebee;}
+.typing-submit{width:100%;margin-top:10px;padding:12px;background:var(--brand);color:#fff;border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;}
+.typing-submit:hover{background:#1049a0;}
+.typing-result{text-align:center;margin-top:14px;min-height:60px;font-size:14px;}
+.typing-result.ok{color:#2e7d32;font-weight:700;}
+.typing-result.ng{color:#c62828;font-weight:700;}
+.typing-result .correct-answer{display:block;font-size:24px;margin-top:6px;color:#2e7d32;}
+.typing-hint-btn{margin-top:14px;width:100%;padding:10px;background:#fff8e1;border:1px solid #f5d87a;border-radius:8px;color:#b8860b;font-size:13px;cursor:pointer;font-family:inherit;}
+.typing-hint-btn:hover{background:#fff3c0;}
+.typing-hint-box{margin-top:10px;padding:12px;background:#fafafa;border-radius:8px;font-size:13px;text-align:left;display:none;}
+.typing-hint-box.show{display:block;}
+.typing-hint-box .hint-jp{color:#222;margin-bottom:3px;}
+.typing-hint-box .hint-rm{color:#888;font-style:italic;margin-bottom:3px;}
+.typing-hint-box .hint-id{color:var(--brand);}
+
+/* ===== 結果画面 ===== */
+.result-box{background:#fff;border-radius:16px;box-shadow:0 4px 16px rgba(0,0,0,.1);padding:24px 18px;text-align:center;margin-bottom:14px;}
+.result-title{font-size:18px;color:var(--brand);font-weight:700;margin-bottom:14px;}
+.result-score{font-size:36px;font-weight:900;color:#222;}
+.result-rate{font-size:14px;color:#666;margin-top:4px;}
+.result-wrong{background:#fff;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.08);padding:16px 14px;margin-bottom:14px;}
+.result-wrong h3{font-size:14px;color:#666;margin-bottom:10px;}
+.result-wrong-item{padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:14px;}
+.result-wrong-item:last-child{border-bottom:none;}
+.result-wrong-item .k{font-weight:700;color:#222;font-size:16px;margin-right:8px;}
+.result-wrong-item .r{color:#888;}
+.result-buttons{display:flex;flex-direction:column;gap:8px;}
+.result-buttons button{padding:12px;border:1.5px solid #ddd;border-radius:10px;background:#fff;color:#444;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;}
+.result-buttons button.primary{background:var(--brand);color:#fff;border-color:var(--brand);}
+.result-buttons button:hover:not(.primary){background:#f5f8fc;}
+.result-buttons button.primary:hover{background:#1049a0;}
+
+/* ===== タッチデバイス :hover 対策（iOS Safari スティッキー hover 問題） ===== */
+@media (hover: none) {
+  .mode-btn:hover:not(.active){background:#fff;color:#444;border-color:#ddd;}
+  .tab:hover:not(.active){background:#fff;border-color:#ddd;color:#444;}
+  .nav-btn:hover{background:#fff;}
+  .quiz-choice:hover:not(:disabled){background:#fff;border-color:#ddd;}
+  .typing-submit:hover{background:var(--brand);}
+  .typing-hint-btn:hover{background:#fff8e1;}
+  .result-buttons button:hover:not(.primary){background:#fff;}
+  .result-buttons button.primary:hover{background:var(--brand);}
+  #pwBtn:hover{background:var(--brand);}
+  .star-remove:hover{color:#ccc;}
+  #clearAllBtn:hover{background:rgba(255,255,255,.2);}
+}
 /* ===== パスワード画面 ===== */
 #pwScreen{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;z-index:9999;}
 #pwBox{background:#fff;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,.12);padding:36px 28px;width:90%;max-width:360px;text-align:center;}
@@ -82,6 +154,13 @@ footer{text-align:center;font-size:11px;color:#bbb;padding:16px;margin-top:8px;}
   </div>
 </div>
 <header><h1>漢字フラッシュカード</h1></header>
+
+<div id="modeBar">
+  <button class="mode-btn active" id="modeFlashBtn">📖 フラッシュカード</button>
+  <button class="mode-btn" id="modeQuizBtn">✅ 4択クイズ</button>
+  <button class="mode-btn" id="modeTypingBtn">⌨️ タイピング</button>
+</div>
+
 <div id="tabBar"></div>
 <div id="cardView">
   <div id="progress"></div>
@@ -107,6 +186,50 @@ footer{text-align:center;font-size:11px;color:#bbb;padding:16px;margin-top:8px;}
   <div id="starHeader"><span>★ 一覧</span><button id="clearAllBtn">★をすべて外す</button></div>
   <div id="starList"></div>
   <div id="noStars" style="display:none">★がついた漢字はありません</div>
+</div>
+
+<!-- ===== 4択クイズ画面 ===== -->
+<div id="quizView">
+  <div id="quizProgress" style="text-align:center;font-size:13px;color:#666;margin-bottom:6px;"></div>
+  <div id="quizProgressBar" style="height:4px;background:#ddd;border-radius:2px;margin-bottom:14px;"><div id="quizProgressFill" style="height:100%;background:var(--brand);border-radius:2px;transition:width .3s;"></div></div>
+  <div class="quiz-card">
+    <div class="quiz-kanji" id="quizKanji"></div>
+    <div class="quiz-prompt">読み方は？</div>
+  </div>
+  <div class="quiz-choices" id="quizChoices"></div>
+</div>
+
+<!-- ===== タイピングクイズ画面 ===== -->
+<div id="typingView">
+  <div id="typingProgress" style="text-align:center;font-size:13px;color:#666;margin-bottom:6px;"></div>
+  <div id="typingProgressBar" style="height:4px;background:#ddd;border-radius:2px;margin-bottom:14px;"><div id="typingProgressFill" style="height:100%;background:var(--brand);border-radius:2px;transition:width .3s;"></div></div>
+  <div class="quiz-card">
+    <div class="quiz-kanji" id="typingKanji"></div>
+    <div class="quiz-prompt">読み方を入力</div>
+  </div>
+  <input class="typing-input" id="typingInput" type="text" placeholder="ひらがな or ローマ字" autocomplete="off" autocapitalize="off" spellcheck="false">
+  <button class="typing-submit" id="typingSubmit">答える</button>
+  <div class="typing-result" id="typingResult"></div>
+  <button class="typing-hint-btn" id="typingHintBtn">💡 ヒント：例文を見る</button>
+  <div class="typing-hint-box" id="typingHintBox"></div>
+</div>
+
+<!-- ===== 結果画面 ===== -->
+<div id="resultView">
+  <div class="result-box">
+    <div class="result-title" id="resultTitle">✅ 結果</div>
+    <div class="result-score" id="resultScore"></div>
+    <div class="result-rate" id="resultRate"></div>
+  </div>
+  <div class="result-wrong" id="resultWrongBox" style="display:none;">
+    <h3>間違えた漢字（★がつきました）</h3>
+    <div id="resultWrongList"></div>
+  </div>
+  <div class="result-buttons">
+    <button class="primary" id="resultRetryBtn">もう一度</button>
+    <button id="resultRetryWrongBtn">間違いだけやり直す</button>
+    <button id="resultMenuBtn">メニューに戻る</button>
+  </div>
 </div>
 
 <script>
@@ -803,6 +926,618 @@ document.getElementById('starBtn').onclick=function(){
 document.getElementById('clearAllBtn').onclick=function(){
   allCards().forEach(function(c){setStar(c.kanji,false);});renderStarView();
 };
+
+/* ============================================================
+   モード管理（flash / quiz / typing / result）
+   ============================================================ */
+let currentMode='flash';
+
+function setMode(mode){
+  currentMode=mode;
+  // モードボタンのactive切り替え
+  document.getElementById('modeFlashBtn').classList.toggle('active',mode==='flash');
+  document.getElementById('modeQuizBtn').classList.toggle('active',mode==='quiz');
+  document.getElementById('modeTypingBtn').classList.toggle('active',mode==='typing');
+  // 各ビューの表示切替
+  hideAllViews();
+  if(mode==='flash'){
+    // フラッシュカードモード：現在のタブに応じて cardView か starView
+    var t=TABS[currentTab];
+    if(t.isStar){document.getElementById('starView').style.display='block';renderStarView();}
+    else{document.getElementById('cardView').style.display='block';render();}
+  } else if(mode==='quiz'){
+    startQuiz();
+  } else if(mode==='typing'){
+    startTyping();
+  }
+}
+
+function hideAllViews(){
+  document.getElementById('cardView').style.display='none';
+  document.getElementById('starView').style.display='none';
+  document.getElementById('quizView').style.display='none';
+  document.getElementById('typingView').style.display='none';
+  document.getElementById('resultView').style.display='none';
+}
+
+document.getElementById('modeFlashBtn').onclick=function(){setMode('flash');};
+document.getElementById('modeQuizBtn').onclick=function(){setMode('quiz');};
+document.getElementById('modeTypingBtn').onclick=function(){setMode('typing');};
+
+/* selectTabもクイズ・タイピングモード対応に拡張 */
+var _origSelectTab=selectTab;
+selectTab=function(i){
+  currentTab=i;reviewMode=false;buildTabs();
+  if(currentMode==='quiz'){startQuiz();return;}
+  if(currentMode==='typing'){startTyping();return;}
+  // flashモード
+  const t=TABS[i];
+  hideAllViews();
+  if(t.isStar){
+    document.getElementById('starView').style.display='block';
+    renderStarView();return;
+  }
+  document.getElementById('cardView').style.display='block';
+  deck=t.data===null?allCards():t.data.slice();
+  idx=0;render();
+};
+
+/* ============================================================
+   クイズ用カードプール取得
+   ============================================================ */
+function getQuizPool(){
+  var t=TABS[currentTab];
+  if(t.isStar){
+    var starred=allCards().filter(function(c){return isStar(c.kanji);});
+    if(starred.length===0)return null; // ★が0
+    return starred;
+  }
+  if(t.data===null)return allCards();
+  return t.data.slice();
+}
+
+/* ============================================================
+   誘惑肢生成ロジック（5戦略）
+   ============================================================ */
+// ひらがなを「拍（モーラ）」に分解
+function splitMora(s){
+  var smalls='ゃゅょャュョ';
+  var moras=[];
+  for(var i=0;i<s.length;i++){
+    var ch=s[i];
+    if(i+1<s.length && smalls.indexOf(s[i+1])>=0){
+      moras.push(ch+s[i+1]);i++;
+    } else {
+      moras.push(ch);
+    }
+  }
+  return moras;
+}
+
+// 段グループ
+var MORA_GROUPS=[
+  // ア段
+  ['か','が','さ','ざ','た','だ','な','は','ば','ぱ','ま','ら','わ'],
+  // イ段
+  ['き','ぎ','し','じ','ち','ぢ','に','ひ','び','ぴ','み','り'],
+  // ウ段
+  ['く','ぐ','す','ず','つ','づ','ぬ','ふ','ぶ','ぷ','む','る'],
+  // エ段
+  ['け','げ','せ','ぜ','て','で','ね','へ','べ','ぺ','め','れ'],
+  // オ段
+  ['こ','ご','そ','ぞ','と','ど','の','ほ','ぼ','ぽ','も','ろ'],
+  // ヤ段（拗音）
+  ['きゃ','ぎゃ','しゃ','じゃ','ちゃ','にゃ','ひゃ','びゃ','ぴゃ','みゃ','りゃ'],
+  // ユ段
+  ['きゅ','ぎゅ','しゅ','じゅ','ちゅ','にゅ','ひゅ','びゅ','ぴゅ','みゅ','りゅ'],
+  // ヨ段
+  ['きょ','ぎょ','しょ','じょ','ちょ','にょ','ひょ','びょ','ぴょ','みょ','りょ'],
+];
+
+function findMoraGroup(m){
+  for(var i=0;i<MORA_GROUPS.length;i++){
+    if(MORA_GROUPS[i].indexOf(m)>=0)return MORA_GROUPS[i];
+  }
+  return null;
+}
+
+// 戦略2：1拍だけ変えた変形
+function generatePhonemeVariants(reading){
+  var variants=[];
+  var moras=splitMora(reading);
+  for(var i=0;i<moras.length;i++){
+    var group=findMoraGroup(moras[i]);
+    if(!group)continue;
+    for(var j=0;j<group.length;j++){
+      if(group[j]===moras[i])continue;
+      var newMoras=moras.slice();
+      newMoras[i]=group[j];
+      variants.push(newMoras.join(''));
+    }
+  }
+  return variants;
+}
+
+// 漢字（CJK統合漢字）の抽出
+function extractKanji(s){
+  var result=[];
+  for(var i=0;i<s.length;i++){
+    var code=s.charCodeAt(i);
+    if(code>=0x4E00 && code<=0x9FFF)result.push(s[i]);
+  }
+  return result;
+}
+
+// 戦略4：音的類似スコア
+function similarityScore(a,b){
+  var score=0;
+  if(a.length===b.length)score+=3;
+  else score-=Math.abs(a.length-b.length);
+  if(a.length>0 && b.length>0 && a[a.length-1]===b[b.length-1])score+=2;
+  if(a.length>0 && b.length>0 && a[0]===b[0])score+=1;
+  var minLen=Math.min(a.length,b.length);
+  for(var i=0;i<minLen;i++){if(a[i]===b[i])score+=1;}
+  return score;
+}
+
+// 配列をシャッフル
+function shuffleArr(arr){
+  var a=arr.slice();
+  for(var i=a.length-1;i>0;i--){
+    var j=Math.floor(Math.random()*(i+1));
+    var t=a[i];a[i]=a[j];a[j]=t;
+  }
+  return a;
+}
+
+// 4択誘惑肢を生成（正解の読みに近い3つ）
+function generateDistractors(correctCard, correctReading, allPool){
+  var distractors=[]; // { text, score }
+  var ALL=allCards();
+
+  // 同じカード内の他読み（正解と同じ jp 以外）
+  var sameCardOtherReadings=correctCard.R
+    .map(function(rv){return rv.jp;})
+    .filter(function(jp){return jp!==correctReading;});
+
+  // 戦略1：同じカードの別の読み
+  for(var i=0;i<sameCardOtherReadings.length && distractors.length<3;i++){
+    if(!hasDistractor(distractors,sameCardOtherReadings[i])){
+      distractors.push({text:sameCardOtherReadings[i],from:'s1'});
+    }
+  }
+
+  // 戦略2：音変形（最大2つ）
+  var phonemeVariants=shuffleArr(generatePhonemeVariants(correctReading));
+  var s2added=0;
+  for(var i=0;i<phonemeVariants.length && s2added<2 && distractors.length<3;i++){
+    var v=phonemeVariants[i];
+    if(v===correctReading)continue;
+    if(sameCardOtherReadings.indexOf(v)>=0)continue; // 別読みと一致する変形は除外
+    if(hasDistractor(distractors,v))continue;
+    distractors.push({text:v,from:'s2'});
+    s2added++;
+  }
+
+  // 戦略3：同じ漢字を含む他カードの読み
+  if(distractors.length<3){
+    var kanjiChars=extractKanji(correctCard.kanji);
+    var s3candidates=[];
+    if(kanjiChars.length>0){
+      for(var i=0;i<ALL.length;i++){
+        var c=ALL[i];
+        if(c===correctCard)continue;
+        var hasShared=false;
+        for(var k=0;k<kanjiChars.length;k++){
+          if(c.kanji.indexOf(kanjiChars[k])>=0){hasShared=true;break;}
+        }
+        if(!hasShared)continue;
+        for(var ri=0;ri<c.R.length;ri++){
+          var jp=c.R[ri].jp;
+          if(jp===correctReading)continue;
+          if(hasDistractor(distractors,jp))continue;
+          // スコア=共有漢字数
+          var sharedCount=0;
+          for(var k=0;k<kanjiChars.length;k++){
+            if(c.kanji.indexOf(kanjiChars[k])>=0)sharedCount++;
+          }
+          s3candidates.push({text:jp,score:sharedCount});
+        }
+      }
+      // スコア順、同点内シャッフル
+      s3candidates.sort(function(a,b){return b.score-a.score;});
+      // 同点グループでシャッフル
+      var grouped={};
+      s3candidates.forEach(function(c){
+        if(!grouped[c.score])grouped[c.score]=[];
+        grouped[c.score].push(c);
+      });
+      var sortedScores=Object.keys(grouped).sort(function(a,b){return b-a;});
+      var s3final=[];
+      sortedScores.forEach(function(s){s3final=s3final.concat(shuffleArr(grouped[s]));});
+      for(var i=0;i<s3final.length && distractors.length<3;i++){
+        if(!hasDistractor(distractors,s3final[i].text)){
+          distractors.push({text:s3final[i].text,from:'s3'});
+        }
+      }
+    }
+  }
+
+  // 戦略2残り
+  for(var i=0;i<phonemeVariants.length && distractors.length<3;i++){
+    var v=phonemeVariants[i];
+    if(v===correctReading)continue;
+    if(sameCardOtherReadings.indexOf(v)>=0)continue;
+    if(hasDistractor(distractors,v))continue;
+    distractors.push({text:v,from:'s2b'});
+  }
+
+  // 戦略4：音的類似
+  if(distractors.length<3){
+    var s4candidates=[];
+    for(var i=0;i<ALL.length;i++){
+      var c=ALL[i];
+      if(c===correctCard)continue;
+      for(var ri=0;ri<c.R.length;ri++){
+        var jp=c.R[ri].jp;
+        if(jp===correctReading)continue;
+        if(hasDistractor(distractors,jp))continue;
+        s4candidates.push({text:jp,score:similarityScore(jp,correctReading)});
+      }
+    }
+    s4candidates.sort(function(a,b){return b.score-a.score;});
+    var grouped={};
+    s4candidates.forEach(function(c){
+      var k=String(c.score);
+      if(!grouped[k])grouped[k]=[];
+      grouped[k].push(c);
+    });
+    var sortedScores=Object.keys(grouped).sort(function(a,b){return Number(b)-Number(a);});
+    var s4final=[];
+    sortedScores.forEach(function(s){s4final=s4final.concat(shuffleArr(grouped[s]));});
+    for(var i=0;i<s4final.length && distractors.length<3;i++){
+      if(!hasDistractor(distractors,s4final[i].text)){
+        distractors.push({text:s4final[i].text,from:'s4'});
+      }
+    }
+  }
+
+  // 戦略5：ランダムフォールバック
+  if(distractors.length<3){
+    var allReadings=[];
+    ALL.forEach(function(c){c.R.forEach(function(rv){allReadings.push(rv.jp);});});
+    var shuffled=shuffleArr(allReadings);
+    for(var i=0;i<shuffled.length && distractors.length<3;i++){
+      if(shuffled[i]===correctReading)continue;
+      if(hasDistractor(distractors,shuffled[i]))continue;
+      distractors.push({text:shuffled[i],from:'s5'});
+    }
+  }
+
+  return distractors.slice(0,3).map(function(d){return d.text;});
+}
+
+function hasDistractor(arr,text){
+  return arr.some(function(d){return d.text===text;});
+}
+
+/* ============================================================
+   4択クイズモード
+   ============================================================ */
+let quizQuestions=[]; // 各問題のカード一覧
+let quizIdx=0;
+let quizCorrectCount=0;
+let quizWrongCards=[]; // 間違えたカード
+let quizCurrentReading=''; // 今の問題の正解読み
+let quizLocked=false; // 解答後ロック（連打防止）
+
+function startQuiz(retryCards){
+  hideAllViews();
+  document.getElementById('quizView').style.display='block';
+  var pool;
+  if(retryCards){
+    pool=retryCards;
+  } else {
+    pool=getQuizPool();
+    if(!pool || pool.length===0){alert('★をつけた漢字がありません。');setMode('flash');return;}
+  }
+  quizQuestions=shuffleArr(pool);
+  quizIdx=0;
+  quizCorrectCount=0;
+  quizWrongCards=[];
+  quizLocked=false;
+  showQuizQuestion();
+}
+
+function showQuizQuestion(){
+  if(quizIdx>=quizQuestions.length){showResult('quiz');return;}
+  quizLocked=false;
+  var card=quizQuestions[quizIdx];
+  // 正解読みをランダムに選ぶ（複数読みのカード対応）
+  var correctReading=card.R[Math.floor(Math.random()*card.R.length)].jp;
+  quizCurrentReading=correctReading;
+
+  document.getElementById('quizProgress').textContent='問題 '+(quizIdx+1)+' / '+quizQuestions.length;
+  document.getElementById('quizProgressFill').style.width=((quizIdx+1)/quizQuestions.length*100)+'%';
+  document.getElementById('quizKanji').textContent=card.kanji;
+
+  // 誘惑肢生成
+  var distractors=generateDistractors(card,correctReading,quizQuestions);
+  var choices=shuffleArr([correctReading].concat(distractors));
+
+  var box=document.getElementById('quizChoices');
+  box.innerHTML='';
+  choices.forEach(function(choice,i){
+    var btn=document.createElement('button');
+    btn.className='quiz-choice';
+    btn.innerHTML='<span class="num">'+['①','②','③','④'][i]+'</span> '+choice;
+    btn.onclick=function(){handleQuizChoice(btn,choice,correctReading,card);};
+    box.appendChild(btn);
+  });
+}
+
+function handleQuizChoice(btn,choice,correct,card){
+  if(quizLocked)return;
+  quizLocked=true;
+  var isCorrect=(choice===correct);
+  var allBtns=document.querySelectorAll('.quiz-choice');
+  allBtns.forEach(function(b){b.disabled=true;});
+  if(isCorrect){
+    btn.classList.add('correct');
+    quizCorrectCount++;
+  } else {
+    btn.classList.add('wrong');
+    // 正解を強調
+    allBtns.forEach(function(b){
+      if(b.textContent.indexOf(correct)>=0)b.classList.add('correct');
+    });
+    // 間違えた漢字に★をつける（重複を避けて記録）
+    setStar(card.kanji,true);
+    if(!quizWrongCards.some(function(c){return c.kanji===card.kanji;})){
+      quizWrongCards.push(card);
+    }
+  }
+  // 自動で次へ
+  setTimeout(function(){
+    quizIdx++;
+    showQuizQuestion();
+  },isCorrect?800:1500);
+}
+
+/* ============================================================
+   タイピングクイズモード
+   ============================================================ */
+let typingQuestions=[];
+let typingIdx=0;
+let typingCorrectCount=0;
+let typingWrongCards=[];
+let typingState='input'; // 'input' | 'judged'
+
+function startTyping(retryCards){
+  hideAllViews();
+  document.getElementById('typingView').style.display='block';
+  var pool;
+  if(retryCards){
+    pool=retryCards;
+  } else {
+    pool=getQuizPool();
+    if(!pool || pool.length===0){alert('★をつけた漢字がありません。');setMode('flash');return;}
+  }
+  typingQuestions=shuffleArr(pool);
+  typingIdx=0;
+  typingCorrectCount=0;
+  typingWrongCards=[];
+  showTypingQuestion();
+}
+
+function showTypingQuestion(){
+  if(typingIdx>=typingQuestions.length){showResult('typing');return;}
+  typingState='input';
+  var card=typingQuestions[typingIdx];
+  document.getElementById('typingProgress').textContent='問題 '+(typingIdx+1)+' / '+typingQuestions.length;
+  document.getElementById('typingProgressFill').style.width=((typingIdx+1)/typingQuestions.length*100)+'%';
+  document.getElementById('typingKanji').textContent=card.kanji;
+  var input=document.getElementById('typingInput');
+  input.value='';
+  input.disabled=false;
+  input.className='typing-input';
+  document.getElementById('typingResult').textContent='';
+  document.getElementById('typingResult').className='typing-result';
+  document.getElementById('typingHintBox').classList.remove('show');
+  document.getElementById('typingHintBox').innerHTML='';
+  document.getElementById('typingSubmit').textContent='答える';
+  setTimeout(function(){input.focus();},50);
+}
+
+// マクロン展開: ō → o*o（複数候補）
+function expandMacrons(s){
+  var variants=[s];
+  function replaceVariants(arr,from,toList){
+    var out=[];
+    arr.forEach(function(str){
+      if(str.indexOf(from)<0){out.push(str);return;}
+      toList.forEach(function(to){
+        out.push(str.split(from).join(to));
+      });
+    });
+    return out;
+  }
+  variants=replaceVariants(variants,'ō',['ou','oo']);
+  variants=replaceVariants(variants,'Ō',['ou','oo','Ou','Oo']);
+  variants=replaceVariants(variants,'ū',['uu']);
+  variants=replaceVariants(variants,'Ū',['uu','Uu']);
+  variants=replaceVariants(variants,'ē',['ee','ei']);
+  variants=replaceVariants(variants,'Ē',['ee','ei','Ee','Ei']);
+  variants=replaceVariants(variants,'ā',['aa']);
+  variants=replaceVariants(variants,'Ā',['aa','Aa']);
+  variants=replaceVariants(variants,'ī',['ii']);
+  variants=replaceVariants(variants,'Ī',['ii','Ii']);
+  // 重複除去
+  return Array.from(new Set(variants));
+}
+
+// ひらがなだけ抽出
+function extractHiragana(s){
+  var result='';
+  for(var i=0;i<s.length;i++){
+    var code=s.charCodeAt(i);
+    // ひらがな・カタカナ・長音符
+    if((code>=0x3040 && code<=0x309F)||(code>=0x30A0 && code<=0x30FF)||code===0x30FC){
+      result+=s[i];
+    }
+  }
+  return result;
+}
+
+function hiraganaVariants(s){
+  // スラッシュで分割
+  var parts=s.split(/[\/／]/);
+  var result=[];
+  parts.forEach(function(p){
+    var h=extractHiragana(p.trim());
+    if(h)result.push(h);
+  });
+  return result;
+}
+
+function romajiVariants(s){
+  var parts=s.split(/[\/／]/);
+  var result=[];
+  parts.forEach(function(p){
+    var clean=p.toLowerCase().trim().replace(/[^a-zōūēāī]/g,'');
+    var expanded=expandMacrons(clean);
+    expanded.forEach(function(v){
+      var pure=v.replace(/[^a-z]/g,'');
+      if(pure)result.push(pure);
+    });
+  });
+  return result;
+}
+
+function userInputRomajiVariants(s){
+  var clean=s.toLowerCase().trim().replace(/\s+/g,'');
+  var expanded=expandMacrons(clean);
+  return expanded.map(function(v){return v.replace(/[^a-z]/g,'');}).filter(function(v){return v;});
+}
+
+function checkTypingAnswer(input,card){
+  var norm=input.toLowerCase().trim().replace(/\s+/g,'');
+  if(!norm)return false;
+  var cardForms=new Set();
+  card.R.forEach(function(rv){
+    hiraganaVariants(rv.jp).forEach(function(v){cardForms.add(v);});
+    romajiVariants(rv.rm).forEach(function(v){cardForms.add(v);});
+  });
+  // ひらがな直接比較
+  if(cardForms.has(norm))return true;
+  // ローマ字変形比較
+  var userVariants=userInputRomajiVariants(input);
+  for(var i=0;i<userVariants.length;i++){
+    if(cardForms.has(userVariants[i]))return true;
+  }
+  return false;
+}
+
+function handleTypingSubmit(){
+  var card=typingQuestions[typingIdx];
+  var input=document.getElementById('typingInput');
+  var resultEl=document.getElementById('typingResult');
+  if(typingState==='input'){
+    var ok=checkTypingAnswer(input.value,card);
+    typingState='judged';
+    input.disabled=true;
+    if(ok){
+      input.classList.add('correct');
+      resultEl.className='typing-result ok';
+      resultEl.innerHTML='✅ 正解！<br><span style="font-size:12px;color:#888;">Enter で次へ</span>';
+      typingCorrectCount++;
+    } else {
+      input.classList.add('wrong');
+      resultEl.className='typing-result ng';
+      var corrects=card.R.map(function(rv){return rv.jp;}).join(' / ');
+      resultEl.innerHTML='❌ 不正解<br><span class="correct-answer">'+corrects+'</span><span style="font-size:12px;color:#888;">Enter で次へ</span>';
+      setStar(card.kanji,true);
+      if(!typingWrongCards.some(function(c){return c.kanji===card.kanji;})){
+        typingWrongCards.push(card);
+      }
+    }
+    document.getElementById('typingSubmit').textContent='次へ';
+  } else {
+    // 'judged' → 次へ
+    typingIdx++;
+    showTypingQuestion();
+  }
+}
+
+document.getElementById('typingSubmit').onclick=handleTypingSubmit;
+document.getElementById('typingInput').addEventListener('keydown',function(e){
+  if(e.key==='Enter'){e.preventDefault();handleTypingSubmit();}
+});
+// 入力欄が disabled の状態（判定後）でも Enter で次へ進めるように document レベルで拾う
+document.addEventListener('keydown',function(e){
+  if(e.key!=='Enter')return;
+  // タイピングモードで判定済み状態のときだけ反応
+  if(currentMode==='typing' && typingState==='judged'){
+    e.preventDefault();
+    handleTypingSubmit();
+  }
+});
+document.getElementById('typingHintBtn').onclick=function(){
+  var card=typingQuestions[typingIdx];
+  var box=document.getElementById('typingHintBox');
+  if(box.classList.contains('show')){
+    box.classList.remove('show');return;
+  }
+  var ex=card.E[0];
+  var html='<div class="hint-jp">'+ex.jp+'</div>';
+  html+='<div class="hint-rm">'+ex.rm+'</div>';
+  html+='<div class="hint-id">'+ex.id+'</div>';
+  box.innerHTML=html;
+  box.classList.add('show');
+};
+
+/* ============================================================
+   結果画面
+   ============================================================ */
+function showResult(mode){
+  hideAllViews();
+  document.getElementById('resultView').style.display='block';
+  var total,correct,wrongCards,title;
+  if(mode==='quiz'){
+    total=quizQuestions.length;correct=quizCorrectCount;
+    wrongCards=quizWrongCards;title='✅ 結果（4択クイズ）';
+  } else {
+    total=typingQuestions.length;correct=typingCorrectCount;
+    wrongCards=typingWrongCards;title='⌨️ 結果（タイピング）';
+  }
+  document.getElementById('resultTitle').textContent=title;
+  document.getElementById('resultScore').textContent=correct+' / '+total;
+  var rate=total>0?Math.round(correct/total*100):0;
+  document.getElementById('resultRate').textContent='正答率：'+rate+'%';
+
+  var wrongBox=document.getElementById('resultWrongBox');
+  if(wrongCards.length>0){
+    wrongBox.style.display='block';
+    var listHtml=wrongCards.map(function(c){
+      var readings=c.R.map(function(rv){return rv.jp;}).join('・');
+      return '<div class="result-wrong-item"><span class="k">'+c.kanji+'</span><span class="r">（'+readings+'）</span></div>';
+    }).join('');
+    document.getElementById('resultWrongList').innerHTML=listHtml;
+  } else {
+    wrongBox.style.display='none';
+  }
+
+  // ボタンの動作を mode に応じて再設定
+  document.getElementById('resultRetryBtn').onclick=function(){
+    if(mode==='quiz')startQuiz();else startTyping();
+  };
+  document.getElementById('resultRetryWrongBtn').onclick=function(){
+    if(wrongCards.length===0){alert('間違えた漢字がありません。');return;}
+    if(mode==='quiz')startQuiz(wrongCards.slice());
+    else startTyping(wrongCards.slice());
+  };
+  document.getElementById('resultMenuBtn').onclick=function(){setMode('flash');};
+}
 
 /* ===== パスワード ===== */
 (function(){
