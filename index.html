@@ -1585,8 +1585,11 @@ document.getElementById('typingInput').addEventListener('keydown',function(e){
   if(e.key==='Enter'){e.preventDefault();handleTypingSubmit();}
 });
 // 入力欄が disabled の状態（判定後）でも Enter で次へ進めるように document レベルで拾う
+// ただし入力欄自身からの Enter は上のリスナーが処理するので、ここでは除外する
 document.addEventListener('keydown',function(e){
   if(e.key!=='Enter')return;
+  // 入力欄からの Enter は上のリスナーで既に処理済み → 重複実行を防ぐ
+  if(e.target && e.target.id==='typingInput')return;
   // タイピングモードで判定済み状態のときだけ反応
   if(currentMode==='typing' && typingState==='judged'){
     e.preventDefault();
